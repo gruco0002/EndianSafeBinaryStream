@@ -18,8 +18,8 @@ with your other source code files.
 
 ## Example
 See the `example.cpp` file of this repository. To compile and run the example
-yourself, just run `make compile` and then run the example by executing
-`./example` (or `example.exe`).
+yourself, just run `make compile` and then `make run`. To clean any files
+created by this process run `make clean`.
 
 ## Extensions
 There are currently two default extensions for writing/reading std::vector

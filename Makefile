@@ -6,8 +6,13 @@ compile:
 	$(CXX) $(CXXFLAGS) -c example.cpp
 	$(CXX) $(CXXFLAGS) example.o EndianSafeBinaryStream.o -o example
 	
+run:
+	./example
+
 clean:
 	rm -rf EndianSafeBinaryStream.o
 	rm -rf example.o
 	rm -rf example
 	rm -rf test.bin
+
+all: compile run clean

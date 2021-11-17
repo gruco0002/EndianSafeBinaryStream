@@ -7,6 +7,10 @@ little-endian based) independent of the endianess of the platform that is
 running the code. This ensures interoperability between systems of different
 endianess.
 
+Currently the sources require the c++17 standard due to the filesystem header
+and some minor things. This can easily be changed if you require compatibility
+to previous standards.
+
 ## How to install
 The easiest way is copying the two source files (`EndianSafeBinaryStream.cpp`
 and `EndianSafeBinaryStream.hpp`) to your project and compile and link them

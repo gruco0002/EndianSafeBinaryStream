@@ -389,7 +389,7 @@ namespace esbs
     template <typename Stream>
     EndianSafeBinaryStream<Stream> &EndianSafeBinaryStream<Stream>::operator>>(uint8_t &v)
     {
-        deserialize_for_integers(stream, v);
+        Helper::deserialize_for_integers(stream, v);
         return *this;
     }
 

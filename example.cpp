@@ -115,5 +115,22 @@ int main(int argc, char **args)
                   << s.c << ", f: " << s.f << " }" << std::endl;
     }
 
+    // deserialize (read) using ifstream
+    {
+        std::ifstream input_filestream("test.bin", std::ios_base::binary);
+        esbs::EndianSafeBinaryStream<std::ifstream> stream(std::move(input_filestream));
+
+        // basic data types
+        uint32_t number1;
+        int16_t number2;
+        double number3;
+
+        stream >> number1 >> number2 >> number3;
+
+        std::cout << "number1: " << number1 << std::endl;
+        std::cout << "number2: " << number2 << std::endl;
+        std::cout << "number3: " << number3 << std::endl;
+    }
+
     return 0;
 }

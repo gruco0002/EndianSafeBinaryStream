@@ -33,6 +33,10 @@ namespace esbs
      * 
      * The Stream template parameter should be instantiated to a type that supports the
      * read, write and !operator, like for example std::fstream.
+     * If EndianSafeBinaryStream is only used for writing, it is sufficient that the Stream
+     * supports the write function.
+     * If EndianSafeBinaryStream is only used for reading, the Stream template parameter
+     * should have an implementation of the read function and the !operator.
      */
     template <typename Stream>
     class EndianSafeBinaryStream

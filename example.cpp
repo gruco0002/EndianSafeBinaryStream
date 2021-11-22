@@ -14,20 +14,27 @@ struct ExampleStruct
 };
 
 // a custom extension for the struct above
-template <>
-struct EndianSafeBinaryStreamExtension<ExampleStruct>
+namespace esbs
 {
-    static EndianSafeBinaryStream &serialize(EndianSafeBinaryStream &stream, const ExampleStruct &v)
+    template <>
+    struct EndianSafeBinaryStreamExtension<ExampleStruct>
     {
-        stream << v.a << v.b << v.c << v.f;
-        return stream;
-    }
-    static EndianSafeBinaryStream &deserialize(EndianSafeBinaryStream &stream, ExampleStruct &v)
-    {
-        stream >> v.a >> v.b >> v.c >> v.f;
-        return stream;
-    }
-};
+
+        template <typename Stream>
+        static EndianSafeBinaryStream<Stream> &serialize(EndianSafeBinaryStream<Stream> &stream, const ExampleStruct &v)
+        {
+            stream << v.a << v.b << v.c << v.f;
+            return stream;
+        }
+
+        template <typename Stream>
+        static EndianSafeBinaryStream<Stream> &deserialize(EndianSafeBinaryStream<Stream> &stream, ExampleStruct &v)
+        {
+            stream >> v.a >> v.b >> v.c >> v.f;
+            return stream;
+        }
+    };
+}
 
 int main(int argc, char **args)
 {
@@ -35,7 +42,7 @@ int main(int argc, char **args)
     // serialize (write) data
     {
         // create the stream
-        EndianSafeBinaryStream stream = EndianSafeBinaryStream::output("test.bin");
+        esbs::EndianSafeBinaryStream<std::fstream> stream = esbs::output_to_file("test.bin");
 
         // basic data types
         uint32_t number1 = 123456789;
@@ -71,7 +78,7 @@ int main(int argc, char **args)
     {
 
         // create the stream
-        EndianSafeBinaryStream stream = EndianSafeBinaryStream::input("test.bin");
+        esbs::EndianSafeBinaryStream<std::fstream> stream = esbs::input_from_file("test.bin");
 
         // basic data types
         uint32_t number1;
